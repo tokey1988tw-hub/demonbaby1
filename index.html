@@ -2197,7 +2197,7 @@ ${srcHtml}`;
                             if (II.pierceChance) details.push(`穿透機率: ${II.pierceChance}%`);
                             if (II.dragonStrike) details.push(`龍的一擊: ${II.dragonStrike}`);
                             if (II.hardWear) details.push('額外削減硬皮');
-                            if (II.armguard) { const agN={dr:'額外減傷',magicDmg:'魔法傷害',mhp:'HP上限',rangedDmg:'遠距離傷害',meleeDmg:'近距離傷害',ac:'AC',hit:'命中'}; const ag=II.armguard; const th=Array.isArray(ag.th)?ag.th:[]; details.push(`臂甲(副手): ${agN[ag.stat]||ag.stat} 基礎+${ag.base||0}` + (th.length?`，強化達+5/+7/+9 時升為 +${th[0]}/+${th[1]}/+${th[2]}(取最高階、非累加)`:'')); }
+                            if (II.armguard) { const agN={none:'無',dr:'額外減傷',magicDmg:'魔法傷害',mhp:'HP上限',rangedDmg:'遠距離傷害',meleeDmg:'近距離傷害',ac:'AC',hit:'命中'}; const ag=II.armguard; if(ag.stat==='none'||(!ag.base&&(!Array.isArray(ag.th)||ag.th.every(v=>!v)))){ details.push('臂甲(副手): 無附加屬性'); } else { const th=Array.isArray(ag.th)?ag.th:[]; details.push(`臂甲(副手): ${agN[ag.stat]||ag.stat} 基礎+${ag.base||0}` + (th.length?`，強化達+5/+7/+9 時升為 +${th[0]}/+${th[1]}/+${th[2]}(取最高階、非累加)`:'')); } }
                             // 防禦
                             if (II.ac) details.push(`AC: ${II.ac}`);
                             if (II.mr) details.push(`MR: ${II.mr}`);
